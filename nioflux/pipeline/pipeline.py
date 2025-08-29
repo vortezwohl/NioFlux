@@ -27,7 +27,7 @@ class Pipeline:
             return self._data, self._extra, self._err
         if len(self._queue) > 0:
             for i, stage in enumerate(self._queue):
-                logger.debug(f'Staging ({i + 1} / {len(self._queue)}) {stage.label}')
+                logger.debug(f'Staging ({i + 1}/{len(self._queue)}) {stage.label}')
                 self._data, self._extra, self._err, self._fire = await stage(data=self._data, extra=self._extra,
                                                                              err=self._err, fire=self._fire,
                                                                              io_ctx=self._io_ctx)

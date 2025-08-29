@@ -9,7 +9,7 @@ from vortezwohl.crypt import sha512
 class PipelineStage:
     def __init__(self, label: str | None = None):
         if label is None:
-            label = sha512(str(time.perf_counter()))
+            label = sha512(str(time.perf_counter()))[:16]
         self._label: str = label
 
     @property
