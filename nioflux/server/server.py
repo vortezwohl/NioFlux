@@ -5,9 +5,9 @@ from typing_extensions import Any
 from nioflux.pipeline.stage import PipelineStage
 from nioflux.pipeline.pipeline import Pipeline
 from nioflux.util.readsuntil import readsuntil
+from nioflux.util.transport_layer import random_port
 
 DEFAULT_HOST = '0.0.0.0'
-DEFAULT_PORT = 23860
 DEFAULT_TIMEOUT = 8.0
 DEFAULT_BUFFER_SIZE = 65536
 DEFAULT_EOT = b'<|eot|>'
@@ -17,7 +17,7 @@ logger = logging.getLogger('nioflux.server')
 
 class Server:
     def __init__(self, pipeline: list[PipelineStage],
-                 host: str = DEFAULT_HOST, port: int = DEFAULT_PORT,
+                 host: str = DEFAULT_HOST, port: int = random_port(),
                  timeout: float = DEFAULT_TIMEOUT, buffer_size: int = DEFAULT_BUFFER_SIZE,
                  eot: bytes = DEFAULT_EOT, extra: Any | None = None):
         assert len(pipeline) > 0, 'pipeline is empty'
