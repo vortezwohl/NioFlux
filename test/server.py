@@ -14,6 +14,7 @@ class MyHandler(PipelineStage):
 
 async def main():
     server = Server([StrDecode(), MyHandler(), StrEncode()], port=2386)
+    print(server)
     await server.run()
 
 
