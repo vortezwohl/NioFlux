@@ -1,16 +1,13 @@
 import asyncio
-import logging
 from typing_extensions import Any
 from typing_extensions import override
 
 from nioflux.pipeline.stage import PipelineStage
 
-logger = logging.getLogger('nioflux.server')
-
 
 class StrDecode(PipelineStage):
-    def __init__(self, label: str = 'error_notifier'):
-        super().__init__(label)
+    def __init__(self):
+        super().__init__(label='str_decode')
 
     @override
     async def __call__(self, data: Any, extra: Any, err: list[Exception],

@@ -9,8 +9,8 @@ logger = logging.getLogger('nioflux.server')
 
 
 class ErrorNotify(PipelineStage):
-    def __init__(self, label: str = 'error_notifier'):
-        super().__init__(label)
+    def __init__(self):
+        super().__init__(label='error_notifier')
 
     @override
     async def __call__(self, data: Any, extra: Any, err: list[Exception],
