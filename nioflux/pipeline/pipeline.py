@@ -15,6 +15,14 @@ class Pipeline:
         self._io_ctx = io_ctx
         self._eof = eof
 
+    @property
+    def eof(self) -> bytes:
+        return self._eof
+
+    @property
+    def io_ctx(self) -> tuple[asyncio.StreamReader, asyncio.StreamWriter]:
+        return self._io_ctx
+
     async def __call__(self) -> tuple[Any, Any, list[Exception]]:
         if not isinstance(self._queue, list):
             return self._data, self._extra, self._err
