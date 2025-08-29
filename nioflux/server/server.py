@@ -17,12 +17,12 @@ logger = logging.getLogger('nioflux.server')
 
 class Server:
     def __init__(self, pipeline: list[PipelineStage],
-                 host: str = DEFAULT_HOST, port: int = random_port(),
+                 host: str = DEFAULT_HOST, port: int | None = None,
                  timeout: float = DEFAULT_TIMEOUT, buffer_size: int = DEFAULT_BUFFER_SIZE,
                  eot: bytes = DEFAULT_EOT, extra: Any | None = None):
         assert len(pipeline) > 0, 'pipeline is empty'
         self._host = host
-        self._port = port
+        self._port = port if port is not None else random_port()
         self._timeout = timeout
         self._buffer_size = buffer_size
         self._eot = eot
