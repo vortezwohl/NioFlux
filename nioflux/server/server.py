@@ -56,7 +56,7 @@ class Server:
             data = await readsuntil(reader=reader, buffer_size=self._buffer_size,
                                     until=self._eot, timeout=self._timeout)
             _, self._extra, _ = await Pipeline(queue=self._pipeline, data=data, extra=self._extra,
-                                               io_ctx=(reader, writer), eot=self._eot).launch()
+                                               io_ctx=(reader, writer)).launch()
         except TimeoutError:
             logger.warning(f'Read timeout on channel {_peer_host}:{_peer_port}')
         finally:

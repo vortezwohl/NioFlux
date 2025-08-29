@@ -7,7 +7,7 @@ class MyHandler(PipelineStage):
     def __init__(self):
         super().__init__(label='my_handler')
 
-    async def __call__(self, data, extra, err, fire, io_ctx, eot):
+    async def __call__(self, data, extra, err, fire, io_ctx):
         print('My data:', data)
         return data, extra, err, fire
 

@@ -13,9 +13,8 @@ class ErrorNotify(PipelineStage):
         super().__init__(label='error_notify')
 
     @override
-    async def __call__(self, data: Any, extra: Any, err: list[Exception],
-                       fire: bool, io_ctx: tuple[asyncio.StreamReader, asyncio.StreamWriter] | None,
-                       eot: bytes) -> tuple[Any, Any, list[Exception], bool]:
+    async def __call__(self, data: Any, extra: Any, err: list[Exception], fire: bool,
+                       io_ctx: tuple[asyncio.StreamReader, asyncio.StreamWriter] | None) -> tuple[Any, Any, list[Exception], bool]:
         reader, _ = io_ctx
         peer = reader.get_extra_info('peername')
         if len(err) > 0:
