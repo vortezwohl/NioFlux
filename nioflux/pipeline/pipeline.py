@@ -6,18 +6,18 @@ from nioflux.pipeline.stage import PipelineStage
 
 class Pipeline:
     def __init__(self, queue: list[PipelineStage], data: Any, extra: Any,
-                 io_ctx: tuple[asyncio.StreamReader, asyncio.StreamWriter] | None, eof: bytes):
+                 io_ctx: tuple[asyncio.StreamReader, asyncio.StreamWriter] | None, eot: bytes):
         self._queue = queue.copy()
         self._data = data
         self._extra = extra
         self._err = []
         self._fire = True
         self._io_ctx = io_ctx
-        self._eof = eof
+        self._eot = eot
 
     @property
-    def eof(self) -> bytes:
-        return self._eof
+    def eot(self) -> bytes:
+        return self._eot
 
     @property
     def io_ctx(self) -> tuple[asyncio.StreamReader, asyncio.StreamWriter]:
@@ -30,7 +30,7 @@ class Pipeline:
             for stage in self._queue:
                 self._data, self._extra, self._err, self._fire = await stage(data=self._data, extra=self._extra,
                                                                              err=self._err, fire=self._fire,
-                                                                             io_ctx=self._io_ctx, eof=self._eof)
+                                                                             io_ctx=self._io_ctx, eot=self._eot)
                 if not self._fire:
                     break
         return self._data, self._extra, self._err

@@ -14,6 +14,6 @@ class PipelineStage:
     @abstractmethod
     async def __call__(self, data: Any, extra: Any, err: List[Exception],
                        fire: bool, io_ctx: tuple[asyncio.StreamReader, asyncio.StreamWriter] | None,
-                       eof: bytes) -> tuple[Any, Any, List[Exception], bool]:
+                       eot: bytes) -> tuple[Any, Any, List[Exception], bool]:
         # data, extra, err, fire
         ...
