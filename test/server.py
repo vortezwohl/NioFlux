@@ -5,7 +5,7 @@ from nioflux import Server, StrDecode, StrEncode, PipelineStage
 
 class MyHandler(PipelineStage):
     def __init__(self):
-        super().__init__(label='my_handler')
+        super().__init__()
 
     async def __call__(self, data, extra, err, fire, io_ctx):
         print('Recv:', data)
@@ -13,7 +13,7 @@ class MyHandler(PipelineStage):
 
 
 async def main():
-    server = Server([StrDecode(), MyHandler(), StrEncode()], port=2386)
+    server = Server([StrDecode(), MyHandler(), StrEncode()])
     print(server)
     await server.run()
 
