@@ -20,14 +20,9 @@ class Pipeline:
             return self._data, self._extra, self._err
         if len(self._queue):
             for stage in self._queue:
-                self._data, self._extra, self._err, self._fire = await stage(
-                    data=self._data,
-                    extra=self._extra,
-                    err=self._err,
-                    fire=self._fire,
-                    io_ctx=self._io_ctx,
-                    eof=self._eof
-                )
+                self._data, self._extra, self._err, self._fire = await stage(data=self._data, extra=self._extra,
+                                                                             err=self._err, fire=self._fire,
+                                                                             io_ctx=self._io_ctx, eof=self._eof)
                 if not self._fire:
                     break
         return self._data, self._extra, self._err
