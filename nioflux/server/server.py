@@ -70,10 +70,10 @@ class Server:
         async with server:
             await server.serve_forever()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (f'nioflux.Server(host={self._host}, port={self._port}, '
                 f'timeout={self._timeout}, buffer_size={self._buffer_size}, '
                 f'eot={self._eot}, extra={self._extra})')
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__str__()
