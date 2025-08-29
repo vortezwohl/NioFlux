@@ -3,7 +3,7 @@ import asyncio
 from nioflux import Server, StrDecode, StrEncode, PipelineStage
 
 
-class MyHandler(PipelineStage):
+class MyProtocolHandler(PipelineStage):
     def __init__(self):
         super().__init__()
 
@@ -13,8 +13,8 @@ class MyHandler(PipelineStage):
 
 
 async def main():
-    server = Server([StrDecode(), MyHandler(), StrEncode()])
-    print(server)
+    server = Server([StrDecode(), MyProtocolHandler(), StrEncode()])
+    print('Server: ', server)
     await server.run()
 
 
