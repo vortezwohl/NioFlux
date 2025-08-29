@@ -15,3 +15,14 @@ def random_port():
         _candidate_port = randint(1025, 65535)
         if port_is_available(_candidate_port):
             return _candidate_port
+
+
+def tcp_send(data: bytes, host: str, port: int, buffer_size: int = 65536) -> bytes:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        try:
+            sock.connect((host, port))
+            sock.sendall(data)
+            resp = sock.recv(buffer_size)
+            return resp
+        except Exception as e:
+            raise e
