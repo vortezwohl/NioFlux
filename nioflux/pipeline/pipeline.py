@@ -23,7 +23,7 @@ class Pipeline:
     def io_ctx(self) -> tuple[asyncio.StreamReader, asyncio.StreamWriter]:
         return self._io_ctx
 
-    async def __call__(self) -> tuple[Any, Any, list[Exception]]:
+    async def launch(self) -> tuple[Any, Any, list[Exception]]:
         if not isinstance(self._queue, list):
             return self._data, self._extra, self._err
         if len(self._queue) > 0:
@@ -34,3 +34,6 @@ class Pipeline:
                 if not self._fire:
                     break
         return self._data, self._extra, self._err
+
+    async def __call__(self) -> tuple[Any, Any, list[Exception]]:
+        return await self.launch()
