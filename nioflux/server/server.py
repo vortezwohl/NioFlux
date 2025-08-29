@@ -51,7 +51,7 @@ class Server:
 
     async def _channel_handler(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
         _peer_host, _peer_port = writer.get_extra_info('peername')
-        logger.debug(f'Receiving data from {_peer_host}:{_peer_port}')
+        logger.debug(f'Channel {_peer_host}:{_peer_port} established.')
         try:
             data = await readsuntil(reader=reader, buffer_size=self._buffer_size,
                                     until=self._eot, timeout=self._timeout)
