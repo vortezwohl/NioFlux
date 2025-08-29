@@ -1,6 +1,6 @@
 import asyncio
 from abc import abstractmethod
-from typing_extensions import Any, List
+from typing_extensions import Any
 
 
 class PipelineStage:
@@ -12,8 +12,8 @@ class PipelineStage:
         return self._label
 
     @abstractmethod
-    async def __call__(self, data: Any, extra: Any, err: List[Exception],
+    async def __call__(self, data: Any, extra: Any, err: list[Exception],
                        fire: bool, io_ctx: tuple[asyncio.StreamReader, asyncio.StreamWriter] | None,
-                       eot: bytes) -> tuple[Any, Any, List[Exception], bool]:
+                       eot: bytes) -> tuple[Any, Any, list[Exception], bool]:
         # data, extra, err, fire
         ...
