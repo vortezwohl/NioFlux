@@ -13,7 +13,7 @@ class MyHandler(PipelineStage):
 
 
 async def main():
-    server = Server([StrDecode(), MyHandler(), StrEncode()])
+    server = Server([StrDecode(), MyHandler(), StrEncode()], port=2386)
     await server.run()
 
 

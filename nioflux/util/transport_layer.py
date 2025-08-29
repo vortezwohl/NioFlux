@@ -17,11 +17,13 @@ def random_port():
             return _candidate_port
 
 
-def tcp_send(data: bytes, host: str, port: int, buffer_size: int = 65536) -> bytes:
+def tcp_send(data: bytes, host: str, port: int, buffer_size: int = 65536, wait: bool = True) -> bytes | None:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         try:
             sock.connect((host, port))
             sock.sendall(data)
+            if not wait:
+                return None
             resp = sock.recv(buffer_size)
             return resp
         except Exception as e:
