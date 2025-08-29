@@ -41,15 +41,15 @@ class Server:
         return self._eot
 
     async def channel_handler(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
-        peer = writer.get_extra_info('peername')
-        logger.debug(f'Receiving data from {peer[0]}:{peer[1]}')
+        _peer_host, _peer_port = writer.get_extra_info('peername')
+        logger.debug(f'Receiving data from {_peer_host}:{_peer_port}')
         try:
             data = await readsuntil(reader=reader, buffer_size=self._buffer_size,
                                     until=self._eot, timeout=self._timeout)
             _, self._extra, _ = await Pipeline(queue=self.pipeline, data=data, extra=self._extra,
                                                io_ctx=(reader, writer), eot=self._eot).launch()
         except TimeoutError:
-            logger.warning(f'Read timeout on channel {peer[0]}:{peer[1]}')
+            logger.warning(f'Read timeout on channel {_peer_host}:{_peer_port}')
         finally:
             writer.close()
             await writer.wait_closed()
