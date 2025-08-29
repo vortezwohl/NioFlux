@@ -1,7 +1,6 @@
 import asyncio
 import logging
-from typing import Any
-
+from typing_extensions import Any
 from typing_extensions import override
 
 from nioflux.pipeline.stage import PipelineStage
