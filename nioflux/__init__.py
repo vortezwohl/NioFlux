@@ -18,3 +18,4 @@ console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
 logging.getLogger('nioflux.server').setLevel(logging.DEBUG)
+logging.getLogger('nioflux.pipeline').setLevel(logging.DEBUG)

@@ -1,7 +1,11 @@
 import asyncio
+import logging
+
 from typing_extensions import Any
 
 from nioflux.pipeline.stage import PipelineStage
+
+logger = logging.getLogger('nioflux.pipeline')
 
 
 class Pipeline:
@@ -22,7 +26,8 @@ class Pipeline:
         if not isinstance(self._queue, list):
             return self._data, self._extra, self._err
         if len(self._queue) > 0:
-            for stage in self._queue:
+            for i, stage in enumerate(self._queue):
+                logger.debug(f'Staging ({i + 1} / {len(self._queue)}) {stage.label}')
                 self._data, self._extra, self._err, self._fire = await stage(data=self._data, extra=self._extra,
                                                                              err=self._err, fire=self._fire,
                                                                              io_ctx=self._io_ctx)
