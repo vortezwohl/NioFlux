@@ -6,5 +6,5 @@ async def readsuntil(reader: StreamReader, buffer_size: int, until: bytes, timeo
     blocks: bytes = bytes(b'')
     while True:
         blocks += await asyncio.wait_for(reader.read(n=buffer_size), timeout)
-        if until in blocks:
-            return blocks
+        if blocks.endswith(until):
+            return blocks[:-len(until)]
