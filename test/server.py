@@ -14,7 +14,7 @@ class MyProtocolHandler(PipelineStage):
 
 async def main():
     server = Server([StrDecode(), MyProtocolHandler(), StrEncode()])
-    print('Server: ', server)
+    print(server)
     await server.run()
 
 

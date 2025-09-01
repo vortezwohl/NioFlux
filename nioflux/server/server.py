@@ -2,6 +2,7 @@ import asyncio
 import logging
 from typing_extensions import Any
 
+from nioflux.server import __ICON__
 from nioflux.pipeline.stage import PipelineStage
 from nioflux.pipeline.pipeline import Pipeline
 from nioflux.util.readsuntil import readsuntil
@@ -71,9 +72,14 @@ class Server:
             await server.serve_forever()
 
     def __str__(self) -> str:
-        return (f'nioflux.Server(host={self._host}, port={self._port}, '
-                f'timeout={self._timeout}, buffer_size={self._buffer_size}, '
-                f'eot={self._eot}, extra={self._extra})')
+        max_len = len(__ICON__.splitlines()[0])
+        _host_and_port = f'{self._host}:{self._port}'
+        _eot = self._eot.decode('utf-8')
+        meta_config = (f'- Timeout: {self._timeout} seconds'
+                       f'\n- BufferSize: {self._buffer_size} bytes'
+                       f'\n- EOT: b"{_eot}"'
+                       f'\n- Extra: {self._extra}')
+        return f'{__ICON__}{_host_and_port:^{max_len}}\n{meta_config:^{max_len}}'
 
     def __repr__(self) -> str:
         return self.__str__()
