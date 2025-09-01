@@ -78,4 +78,6 @@ class Server:
         return f'{__ICON__}{_host_and_port:^{max_len}}'
 
     def __repr__(self) -> str:
-        return self.__str__()
+        return (f'nioflux.Server(host={self._host}, port={self._port}, '
+                f'timeout={self._timeout}, buffer_size={self._buffer_size}, '
+                f'eot={self._eot}, extra={self._extra})')
