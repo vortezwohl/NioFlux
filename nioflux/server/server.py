@@ -73,13 +73,9 @@ class Server:
 
     def __str__(self) -> str:
         max_len = len(__ICON__.splitlines()[0])
-        _host_and_port = f'{self._host}:{self._port}'
+        _host_and_port = f'={self._host}:{self._port}='
         _eot = self._eot.decode('utf-8')
-        meta_config = (f'- Timeout: {self._timeout} seconds'
-                       f'\n- BufferSize: {self._buffer_size} bytes'
-                       f'\n- EOT: b"{_eot}"'
-                       f'\n- Extra: {self._extra}')
-        return f'{__ICON__}{_host_and_port:^{max_len}}\n{meta_config:^{max_len}}'
+        return f'{__ICON__}{_host_and_port:^{max_len}}'
 
     def __repr__(self) -> str:
         return self.__str__()
