@@ -1,6 +1,6 @@
 [project]
 name = "nioflux"
-version = "0.0.1.alpha4"
+version = "0.0.2"
 description = "A lightweight asynchronous scalable TCP frame protocol server."
 readme = "README.md"
 requires-python = ">=3.10"
